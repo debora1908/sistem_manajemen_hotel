@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Reservation; // Pastikan Anda sudah membuat Model Reservation
+use App\Models\Reservasi; // Pastikan Anda sudah membuat Model Reservation
 
 class HotelController extends Controller
 {
@@ -37,7 +37,7 @@ class HotelController extends Controller
     public function dashboard()
     {
         // Ambil semua data reservasi terbaru dari database
-        $reservations = Reservation::latest()->get();
+        $reservations = Reservasi::latest()->get();
 
         // Hitung logika angka widget box secara dinamis berdasarkan data masuk
         $totalKamar     = 50;

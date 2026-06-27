@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReservasiController;
 
 // 1. Halaman Utama / Landing Page (Gambar Mockup 1)
 // Diubah dari 'index' ke 'reservasi.welcome' agar sesuai dengan struktur welcome baru Anda
@@ -32,3 +33,7 @@ Route::get('/reservasi/daftar', function () {
 // Halaman Kamar
 Route::get('/kamar', [KamarController::class, 'index']);
 Route::get('/data-kamar', [HotelController::class, 'dataKamar'])->name('kamar');
+Route::get('/admin/reservasi', [ReservasiController::class, 'adminIndex'])->name('reservasi.admin');
+Route::get('/kamar/create', [KamarController::class, 'create'])->name('kamar.create');
+
+Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.store');

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
+           
             $table->string('tamu');
         $table->string('kamar');
         $table->date('check_in');
@@ -20,6 +21,7 @@ return new class extends Migration
         $table->integer('total_bayar')->default(1500000);
         $table->string('status')->default('Lunas');
             $table->timestamps();
+           
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('reservasis');
     }
 };
