@@ -36,7 +36,7 @@
         <div class="sidebar-brand">🏢 E-Hotel Mgt</div>
         <ul class="sidebar-menu">
             <li class="active"><a href="#">📊 Dashboard</a></li>
-            <li><a href="#">🚪 Manajemen Kamar</a></li>
+            <li><a href="/kamar" class="block p-3 rounded-lg hover:bg-slate-800 transition">🛏️ Manajemen Kamar</a></li>
             <li><a href="#">📖 Reservasi Tamu</a></li>
             <li><a href="#">👥 Pengguna</a></li>
         </ul>

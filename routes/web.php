@@ -37,3 +37,15 @@ Route::get('/admin/reservasi', [ReservasiController::class, 'adminIndex'])->name
 Route::get('/kamar/create', [KamarController::class, 'create'])->name('kamar.create');
 
 Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.store');
+Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
+
+// 2. Jalur Form Tambah & Proses Simpan (Create)
+Route::get('/kamar/create', [KamarController::class, 'create'])->name('kamar.create');
+Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.store');
+
+// 3. Jalur Form Edit & Proses Update (Update)
+Route::get('/kamar/{id}/edit', [KamarController::class, 'edit'])->name('kamar.edit');
+Route::put('/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
+
+// 4. Jalur Proses Hapus (Delete)
+Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])->name('kamar.destroy');
