@@ -69,3 +69,6 @@ Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])->name('kamar.d
 Route::get('/villas', function () {
     return view('villas.index');
 })->name('villas.index');
+Route::get('/beach-club', function () {
+    return view('beach-club.index');
+})->name('beachclub.index');
