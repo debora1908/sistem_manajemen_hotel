@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Five Star Horizon Hotel - Bali Theme</title>
+    <title>Nirwana Hotel - Bali Theme</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: #f8f9fa; }
@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <a href="#" class="logo">≈ Five Star Horizon Hotel</a>
+        <a href="#" class="logo">≈ Nirwana Hotel</a>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
