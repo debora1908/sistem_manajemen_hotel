@@ -84,6 +84,20 @@
                         <input type="text" name="nama_tamu" placeholder="Masukkan nama lengkap Anda" required
                             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition">
                     </div>
+                  
+<div>
+    <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
+        Email Tamu
+    </label>
+
+    <input
+        type="email"
+        name="email"
+        placeholder="Masukkan email aktif Anda"
+        required
+        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-800 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-slate-900 transition">
+</div>
+
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">Pilihan Villa / Kamar</label>
