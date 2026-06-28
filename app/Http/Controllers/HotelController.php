@@ -20,7 +20,7 @@ class HotelController extends Controller
 
         // 2. Simpan ke Database
         // Sesuaikan nama kolomnya dengan migration tabel Anda
-        Reservation::create([
+        Reservasi::create([
             'tamu'      => $request->tamu,
             'kamar'     => $request->kamar,
             'check_in'  => $request->check_in,
