@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservasi Kamar - Five Star Horizon Hotel</title>
+    <!-- Tailwind CSS v4 -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Bootstrap Icons untuk ikon navbar & tombol -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,18 +19,41 @@
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col justify-between">
 
-    <header class="w-full px-6 py-4 md:px-12 flex justify-between items-center bg-white shadow-xs border-b border-slate-100">
+    <!-- NAVBAR (Sudah diredesain dengan Tailwind agar serasi) -->
+    <nav class="w-full bg-white shadow-xs border-b border-slate-100 px-6 py-4 md:px-12 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div class="text-base font-semibold text-slate-800 tracking-wide flex items-center gap-2">
-            Five Star Horizon Hotel
+            <i class="bi bi-water text-cyan-600"></i> Five Star Horizon Hotel
         </div>
-        <a href="{{ url('/') }}" class="text-xs font-medium text-slate-500 hover:text-slate-800 transition">
-            ← Kembali ke Beranda
-        </a>
-    </header>
+        
+        <div class="flex items-center gap-4 flex-wrap justify-center">
+            <a href="{{ url('/') }}" class="text-xs font-medium text-slate-500 hover:text-slate-800 transition flex items-center gap-1">
+                <i class="bi bi-house"></i> Beranda
+            </a>
+            <a href="{{ url('/kamar') }}" class="text-xs font-medium text-slate-600 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition">
+                Manajemen Kamar
+            </a>
+            
+            <!-- Deteksi Status Login Admin -->
+            @auth
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="text-xs bg-red-600 hover:bg-red-700 text-white font-medium px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1 cursor-pointer">
+                        <i class="bi bi-box-arrow-right"></i> Keluar
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-medium px-3 py-1.5 rounded-lg transition inline-flex items-center gap-1">
+                    <i class="bi bi-person-lock"></i> Login Admin
+                </a>
+            @endauth
+        </div>
+    </nav>
 
+    <!-- MAIN CONTENT -->
     <main class="flex-grow flex items-center justify-center p-4 md:p-10">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-4xl w-full flex flex-col md:flex-row min-h-[550px]">
             
+            <!-- Sidebar Informasi (Kiri) -->
             <div class="md:w-2/5 bg-slate-900 text-white p-8 flex flex-col justify-between relative min-h-[200px] md:min-h-full">
                 <div class="absolute inset-0 bg-cover bg-center opacity-40" 
                      style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80');"></div>
@@ -43,6 +70,7 @@
                 </div>
             </div>
 
+            <!-- Form Konten (Kanan) -->
             <div class="md:w-3/5 p-8 sm:p-10 flex flex-col justify-center">
                 <div class="mb-6">
                     <h3 class="font-serif text-2xl font-semibold text-slate-800">Form Reservasi Hotel</h3>
@@ -93,6 +121,7 @@
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer class="w-full text-center py-4 text-[11px] text-slate-400 bg-white border-t border-slate-100">
         &copy; 2026 Five Star Horizon Hotel. All rights reserved.
     </footer>
