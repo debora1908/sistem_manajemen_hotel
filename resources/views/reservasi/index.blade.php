@@ -144,58 +144,65 @@
                 
                 <!-- Bagian Kanan: Form Input -->
                 <div class="col-md-7">
-                    <div class="form-section">
-                        <div class="mb-4">
-                            <h2 class="form-title mb-1">Form Reservasi Hotel</h2>
-                            <p class="text-muted small">Silakan isi detail data masa inap Anda dengan benar.</p>
-                        </div>
+    <div class="form-section">
+        
+        <!-- Wadah Notifikasi Sukses -->
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-                        <form action="{{ route('reservasi.store') }}" method="POST">
-                            @csrf
+        <div class="mb-4">
+            <h2 class="form-title mb-1">Form Reservasi Hotel</h2>
+            <p class="text-muted small">Silakan isi detail data masa inap Anda dengan benar.</p>
+        </div>
 
-                            <!-- Input Nama -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">NAMA TAMU</label>
-                                <input type="text" name="nama_tamu" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
-                            </div>
+        <form action="{{ route('reservasi.store') }}" method="POST">
+            @csrf
 
-                            <!-- Input Email -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">EMAIL TAMU</label>
-                                <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif Anda" required>
-                            </div>
+            <!-- Input Nama -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary">NAMA TAMU</label>
+                <input type="text" name="nama_tamu" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+            </div>
 
-                            <!-- Pilihan Tipe Kamar -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
-                                <select name="kamar_id" class="form-select" required>
-                                    <option value="">Pilih tipe kamar hotel...</option>
-                                    <option value="standard">Standard Room - Rp 500.000</option>
-                                    <option value="deluxe">Deluxe Room - Rp 1.000.000</option>
-                                    <option value="deluxe">Excecutif Room - Rp 1.500.000</option>
-                                </select>
-                            </div>
+            <!-- Input Email -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary">EMAIL TAMU</label>
+                <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif Anda" required>
+            </div>
 
-                            <!-- Input Tanggal (Sejajar Grid) -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-6">
-                                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK IN</label>
-                                    <input type="date" name="tanggal_checkin" class="form-control" required>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK OUT</label>
-                                    <input type="date" name="tanggal_checkout" class="form-control" required>
-                                </div>
-                            </div>
+            <!-- Pilihan Tipe Kamar (Sudah bersih dari karakter nyasar) -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
+                <select name="kamar_id" class="form-select" required>
+                    <option value="">Pilih tipe kamar hotel...</option>
+                    <option value="standard">Standard Room - Rp 500.000</option>
+                    <option value="deluxe">Deluxe Room - Rp 1.000.000</option>
+                    <option value="excecutif">Excecutif Room - Rp 1.500.000</option>
+                </select>
+            </div>
 
-                            <!-- Tombol Pesan -->
-                            <button type="submit" class="btn btn-hotel w-100 shadow-sm text-uppercase">Pesan Sekarang</button>
-                        </form>
-                    </div>
+            <!-- Input Tanggal (Sejajar Grid) -->
+            <div class="row g-3 mb-4">
+                <div class="col-6">
+                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK IN</label>
+                    <input type="date" name="tanggal_checkin" class="form-control" required>
+                </div>
+                <div class="col-6">
+                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK OUT</label>
+                    <input type="date" name="tanggal_checkout" class="form-control" required>
                 </div>
             </div>
-        </div>
+
+            <!-- Tombol Pesan -->
+            <button type="submit" class="btn btn-hotel w-100 shadow-sm text-uppercase">Pesan Sekarang</button>
+        </form>
+        
     </div>
+</div>
 
 </body>
 </html>

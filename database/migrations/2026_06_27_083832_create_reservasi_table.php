@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
-           
-            $table->string('tamu');
-        $table->string('kamar');
-        $table->date('check_in');
-        $table->date('check_out');
-        $table->integer('total_bayar')->default(1500000);
-        $table->string('status')->default('Lunas');
+            $table->string('tamu'); // Nama tamu
+            $table->string('email'); // Tambahkan kolom email jika belum ada agar form tidak error
+            $table->string('kamar'); // Tipe Kamar
+            $table->date('check_in'); // Tanggal Check In
+            $table->date('check_out'); // Tanggal Check Out
+            $table->integer('total_bayar'); // Total Bayar (Dihitung otomatis di Controller)
+            $table->string('status')->default('Pending'); // Default awal 'Pending' sebelum dikonfirmasi Admin
             $table->timestamps();
-           
         });
+    
     }
 
     /**

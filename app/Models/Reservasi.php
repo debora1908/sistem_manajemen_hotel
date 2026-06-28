@@ -9,16 +9,18 @@ class Reservasi extends Model
 {
     use HasFactory;
 
-    // Menentukan kolom mana saja yang boleh diisi massal
+    // SINKRONISASI: Nama kolom harus sesuai persis dengan file migrasi database Anda
     protected $fillable = [
-        'nama_tamu',
-        'email_tamu',
-        'kamar_id',
-        'tanggal_checkin',
-        'tanggal_checkout'
+        'tamu',         // <--- Sudah diperbaiki dari 'nama_tamu'
+        'email',
+        'kamar',
+        'check_in',     // <--- Sudah diperbaiki dari 'tanggal_checkin'
+        'check_out',    // <--- Sudah diperbaiki dari 'tanggal_checkout'
+        'total_bayar',
+        'status'
     ];
 
-    // Relasi: Setiap reservasi dipastikan memilih 1 Kamar
+    // Hubungan relasi ke model Kamar
     public function kamar()
     {
         return $this->belongsTo(Kamar::class, 'kamar_id');

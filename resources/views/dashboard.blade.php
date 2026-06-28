@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="table-section">
             <div class="table-title">🕒 Log Reservasi Terbaru</div>
             <table>
@@ -80,24 +81,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($reservasis as $res)
                     <tr>
-                        <td>Cory Debora</td>
-                        <td>Deluxe - Room 302</td>
-                        <td>2026-06-19</td>
-                        <td>2026-06-22</td>
-                        <td>Rp 1.500.000</td>
-                        <td><span class="status-badge">Lunas</span></td>
-                    </tr>
-                    @foreach($reservations as $res)
-                    <tr>
+                        <!-- 1. DIUBAH: nama_tamu menjadi tamu -->
                         <td>{{ $res->tamu }}</td>
+
                         <td>{{ $res->kamar }}</td>
+
+                        <!-- 2. DIUBAH: tanggal_checkin menjadi check_in -->
                         <td>{{ $res->check_in }}</td>
+
+                        <!-- 3. DIUBAH: tanggal_checkout menjadi check_out -->
                         <td>{{ $res->check_out }}</td>
+
                         <td>Rp {{ number_format($res->total_bayar, 0, ',', '.') }}</td>
-                        <td><span class="status-badge">{{ $res->status }}</span></td>
+                        <td>
+                            <span class="badge {{ $res->status == 'Lunas' ? 'bg-success' : 'bg-warning text-dark' }}">
+                                {{ $res->status }}
+                            </span>
+                        </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">Belum ada data reservasi terbaru.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
