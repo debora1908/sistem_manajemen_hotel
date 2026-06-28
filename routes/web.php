@@ -66,3 +66,6 @@ Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.stor
 Route::get('/kamar/{id}/edit', [KamarController::class, 'edit'])->name('kamar.edit');
 Route::put('/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
 Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])->name('kamar.destroy');
+Route::get('/villas', function () {
+    return view('villas.index');
+})->name('villas.index');
