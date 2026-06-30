@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// TAMBAHKAN BARIS INI:
-use Illuminate\Database\Eloquent\Factories\HasFactory; 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Booking;
 class Booking extends Model
 {
-    use HasFactory; // Sekarang ini tidak akan error lagi
+  use HasFactory;
 
     protected $fillable = [
         'nama_tamu',
@@ -19,4 +18,5 @@ class Booking extends Model
         'check_out',
         'status_bayar'
     ];
+  //
 }
