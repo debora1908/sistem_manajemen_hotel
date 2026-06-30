@@ -12,9 +12,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Halaman Form Reservasi Kamar (Langsung panggil view karena opsi kamar sudah manual)
-Route::get('/reservasi', function () {
-    return view('reservasi.index'); 
-})->name('reservasi.index');
+Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
 
 // Proses Kiriman Data Form Reservasi (Tombol "Pesan Sekarang")
 Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
@@ -35,32 +33,30 @@ Route::get('/reservasi/daftar', function () {
     return view('reservasi.daftar');
 })->name('reservasi.daftar');
 
-// Mengarahkan langsung ke file views/admin/dashboard.blade.php
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+Route::middleware(['auth'])->prefix('admin')->as('admin.')->group(function() {
 
-// Halaman Admin Reservasi
-Route::get('/admin/reservasi', [ReservasiController::class, 'adminIndex'])->name('reservasi.admin');
+    // Halaman Utama Dashboard Admin -> Sekarang hanya bisa diakses jika sudah login
+    // URL: sistem_manajemen_hotel.test/admin/dashboard
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-// Data Kamar
-Route::get('/data-kamar', [HotelController::class, 'dataKamar'])->name('kamar');
+    // Halaman Admin Reservasi
+    Route::get('/reservasi', [ReservasiController::class, 'adminIndex'])->name('reservasi.admin');
 
-
-Route::prefix('admin')->as('admin.')->group(function() {
-
-    // Tampil Semua Kamar -> Berubah nama menjadi: admin.kamar.index
+    // --- GRUP CRUD KAMAR ADMIN ---
+    // Tampil Semua Kamar
     Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
 
-    // Form Tambah Kamar & Proses Simpan -> Berubah nama menjadi: admin.kamar.create & admin.kamar.store
+    // Form Tambah Kamar & Proses Simpan
     Route::get('/kamar/create', [KamarController::class, 'create'])->name('kamar.create');
     Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.store');
 
-    // Form Edit Kamar & Proses Update -> Berubah nama menjadi: admin.kamar.edit & admin.kamar.update
+    // Form Edit Kamar & Proses Update
     Route::get('/kamar/{id}/edit', [KamarController::class, 'edit'])->name('kamar.edit');
     Route::put('/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
 
-    // Proses Hapus Kamar -> Berubah nama menjadi: admin.kamar.destroy
+    // Proses Hapus Kamar
     Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])->name('kamar.destroy');
 
 });
@@ -77,3 +73,8 @@ Route::get('/beach-club', function () {
 Route::get('/wellness', function () {
     return view('wellness.index');
 })->name('wellness.index');
+
+Route::get('/booking/pembayaran/{id}', function ($id) {
+    return view('reservasi.pembayaran', ['id' => $id]);
+})->name('booking.pembayaran');
+Route::get('/pembayaran/{id}', [ReservasiController::class, 'pembayaran'])->name('pembayaran.halaman');

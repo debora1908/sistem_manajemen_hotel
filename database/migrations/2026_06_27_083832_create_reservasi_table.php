@@ -14,12 +14,21 @@ return new class extends Migration
         Schema::create('reservasis', function (Blueprint $table) {
             $table->id();
            
-            $table->string('tamu');
-        $table->string('kamar');
-        $table->date('check_in');
-        $table->date('check_out');
-        $table->integer('total_bayar')->default(1500000);
-        $table->string('status')->default('Lunas');
+            $table->string('nama_tamu');
+
+        $table->string('email_tamu');
+
+        $table->unsignedBigInteger('kamar_id');
+
+        $table->date('tanggal_checkin');
+
+        $table->date('tanggal_checkout');
+
+        $table->string('metode_pembayaran');
+
+        $table->integer('total_bayar')->default(0);
+
+        $table->string('status')->default('Belum Dibayar');
             $table->timestamps();
            
         });

@@ -166,15 +166,16 @@
                             </div>
 
                             <!-- Pilihan Tipe Kamar -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
-                                <select name="kamar_id" class="form-select" required>
-                                    <option value="">Pilih tipe kamar hotel...</option>
-                                    <option value="standard">Standard Room - Rp 500.000</option>
-                                    <option value="deluxe">Deluxe Room - Rp 1.000.000</option>
-                                    <option value="deluxe">Excecutif Room - Rp 1.500.000</option>
-                                </select>
-                            </div>
+                           <select name="kamar_id" class="form-select" required>
+    <option value="">Pilih tipe kamar hotel...</option>
+
+    @foreach($kamars as $kamar)
+        <option value="{{ $kamar->id }}">
+            {{ $kamar->tipe_kamar }} - Rp {{ number_format($kamar->harga_per_malam,0,',','.') }}
+        </option>
+    @endforeach
+
+</select>
 
                             <!-- Input Tanggal (Sejajar Grid) -->
                             <div class="row g-3 mb-4">
@@ -187,6 +188,14 @@
                                     <input type="date" name="tanggal_checkout" class="form-control" required>
                                 </div>
                             </div>
+                            <div class="mb-4">
+    <label class="form-label fw-bold small text-secondary">METODE PEMBAYARAN</label>
+    <select name="metode_pembayaran" class="form-select" required>
+        <option value="" disabled selected>Pilih metode pembayaran...</option>
+        <option value="cash">Cash (Bayar di tempat)</option>
+        <option value="transfer">Transfer Bank</option>
+    </select>
+</div>
 
                             <!-- Tombol Pesan -->
                             <button type="submit" class="btn btn-hotel w-100 shadow-sm text-uppercase">Pesan Sekarang</button>
