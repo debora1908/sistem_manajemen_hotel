@@ -3,197 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi Kamar - Five Star Horizon Hotel</title>
+    <title>Booking Sanctuary - Five Star Horizon Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #f4f7f9;
             color: #2D3748;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
-        
-        /* NAVBAR FIX: Membatasi lebar kontainer navbar agar tidak terlalu rata kanan-kiri */
-        .navbar-custom {
+        .navbar {
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
         }
-        .navbar-brand-custom {
+        .navbar-brand {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             color: #0E7490;
-            text-decoration: none;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
         }
-        .nav-link-custom {
-            color: #64748b;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-        .nav-link-custom:hover {
-            color: #0E7490;
-        }
-
-        /* LAYOUT FIX: Membatasi lebar card utama agar tidak melar/lebar ke samping */
-        .main-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        .booking-card {
-            background-color: #ffffff;
+        /* Card Layout Split Terinspirasi dari image_996ca9.jpg */
+        .reservation-container {
+            max-width: 1050px;
+            background: #ffffff;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(14, 116, 144, 0.08);
-            width: 100%;
-            max-width: 950px; /* Batasi lebar maksimal di sini */
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            margin-top: 40px;
+            margin-bottom: 60px;
         }
-        
-        .img-sidebar {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800&auto=format&fit=crop');
+        .banner-side {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 100%;
             padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            color: white;
+            justify-content: flex-start;
+            color: #ffffff;
+            min-height: 550px;
         }
-        .card-title-hotel {
+        .banner-side h2 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+            font-size: 2.5rem;
+            margin-top: 10px;
         }
-        .form-section {
-            padding: 45px;
+        /* Style Form & Input Diadopsi dari image_996c29.png */
+        .form-side {
+            padding: 45px 50px;
         }
-        .form-title {
+        .form-side h3 {
             font-family: 'Playfair Display', serif;
-            color: #0E7490;
             font-weight: 700;
+            color: #0F766E;
+            margin-bottom: 5px;
+        }
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #334155;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase; /* Membuat teks label kapital tegas */
         }
         .form-control, .form-select {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
-            padding: 12px;
-            border-radius: 10px;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
             color: #334155;
+            transition: all 0.2s ease;
         }
         .form-control:focus, .form-select:focus {
             background-color: #ffffff;
             border-color: #0E7490;
-            box-shadow: 0 0 0 0.25rem rgba(14, 116, 144, 0.15);
+            box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.15);
         }
-        .btn-hotel {
-            background-color: #0E7490;
-            color: white;
-            font-weight: 600;
-            border: none;
+        /* Desain Tombol Hitam Tegas di image_996c29.png */
+        .btn-submit {
+            background-color: #1E293B;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             padding: 14px;
-            border-radius: 10px;
-            transition: 0.3s;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            transition: background-color 0.2s;
+            margin-top: 15px;
         }
-        .btn-hotel:hover {
-            background-color: #0F766E;
-            color: white;
+        .btn-submit:hover {
+            background-color: #0F172A;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR: Menggunakan container biasa agar rata tengah dan tidak terlalu jauh ke tepi -->
-    <nav class="navbar-custom">
+    <!-- NAVBAR ATAS -->
+    <nav class="navbar shadow-sm">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center w-100">
-                <a href="{{ route('home') }}" class="navbar-brand-custom">
-                    <i class="bi bi-water"></i> Nirwana Hotel
-                </a>
-                <div>
-                    <a href="{{ route('home') }}" class="nav-link-custom me-4"><i class="bi bi-house-door"></i> Beranda</a>
-                    <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm px-3 rounded-pill">Login Admin</a>
-                </div>
-            </div>
+            <a class="navbar-brand" href="/">Five Star Horizon Hotel</a>
+            <a href="/" class="text-secondary text-decoration-none small"><i class="bi bi-arrow-left"></i> Kembali ke Beranda</a>
         </div>
     </nav>
 
-    <!-- KONTEN UTAMA FORM RESERVASI -->
-    <div class="main-container">
-        <div class="booking-card">
-            <div class="row g-0">
-                <!-- Bagian Kiri: Gambar Banner -->
-                <div class="col-md-5 d-none d-md-block">
-                    <div class="img-sidebar">
-                        <div>
-                            <span class="badge bg-warning text-dark fw-bold mb-2 text-uppercase tracking-wider" style="font-size: 0.75rem;">Exclusive Stay</span>
-                            <h2 class="card-title-hotel fs-1 mt-1">Tropical Paradise</h2>
-                            <p class="small text-white-50 mt-3">Satu langkah lagi untuk menikmati kemewahan menginap terbaik dengan pemandangan langsung ke pantai tropis Bali.</p>
-                        </div>
-                        <div class="small"><i class="bi bi-geo-alt-fill text-warning"></i> Badung, Bali, Indonesia</div>
-                    </div>
-                </div>
-                
-                <!-- Bagian Kanan: Form Input -->
-                <div class="col-md-7">
-                    <div class="form-section">
-                        <div class="mb-4">
-                            <h2 class="form-title mb-1">Form Reservasi Hotel</h2>
-                            <p class="text-muted small">Silakan isi detail data masa inap Anda dengan benar.</p>
-                        </div>
-
-                        <form action="{{ route('reservasi.store') }}" method="POST">
-                            @csrf
-
-                            <!-- Input Nama -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">NAMA TAMU</label>
-                                <input type="text" name="nama_tamu" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
-                            </div>
-
-                            <!-- Input Email -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">EMAIL TAMU</label>
-                                <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif Anda" required>
-                            </div>
-
-                            <!-- Pilihan Tipe Kamar -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
-                                <select name="kamar_id" class="form-select" required>
-                                    <option value="">Pilih tipe kamar hotel...</option>
-                                    <option value="standard">Standard Room - Rp 500.000</option>
-                                    <option value="deluxe">Deluxe Room - Rp 1.000.000</option>
-                                    <option value="deluxe">Excecutif Room - Rp 1.500.000</option>
-                                </select>
-                            </div>
-
-                            <!-- Input Tanggal (Sejajar Grid) -->
-                            <div class="row g-3 mb-4">
-                                <div class="col-6">
-                                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK IN</label>
-                                    <input type="date" name="tanggal_checkin" class="form-control" required>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK OUT</label>
-                                    <input type="date" name="tanggal_checkout" class="form-control" required>
-                                </div>
-                            </div>
-
-                            <!-- Tombol Pesan -->
-                            <button type="submit" class="btn btn-hotel w-100 shadow-sm text-uppercase">Pesan Sekarang</button>
-                        </form>
-                    </div>
+    <!-- CONTAINER RESERVASI UTAMA -->
+    <div class="container d-flex justify-content-center">
+        <div class="reservation-container row g-0 w-100">
+            
+            <!-- SISI KIRI: BANNER VISUAL (Sesuai image_996ca9.jpg) -->
+            <div class="col-lg-5 banner-side">
+                <span class="text-warning small fw-bold text-uppercase" style="letter-spacing: 2px;">Exclusive Stay</span>
+                <h2>Tropical Paradise</h2>
+                <p class="small text-white-50 mt-2" style="max-width: 320px; line-height: 1.6;">
+                    Satu langkah lagi untuk menikmati kemewahan menginap terbaik dengan pemandangan langsung ke pantai tropis Bali.
+                </p>
+                <div class="mt-auto pt-4 border-top border-secondary small text-white-50">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> Badung, Bali, Indonesia
                 </div>
             </div>
+
+            <!-- SISI KANAN: FORM INPUT DATA (Struktur Terbuka & Tegas Sesuai image_996c29.png) -->
+            <div class="col-lg-7 form-side d-flex flex-column justify-content-center">
+                <div class="mb-4">
+                    <h3>Form Reservasi Hotel</h3>
+                    <p class="text-muted small">Silakan isi detail data masa inap Anda dengan benar.</p>
+                </div>
+
+               <form action="{{ route('booking.store') }}" method="POST">
+    @csrf
+   <input type="text" name="nama_tamu" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                    <!-- NAMA TAMU -->
+                    <div class="mb-3">
+                          </div>
+                    <div class="mb-3">
+        <label for="email_tamu" class="form-label">Email Tamu</label>
+        <input type="email" class="form-control" id="email_tamu" name="email_tamu" placeholder="Masukkan email aktif Anda" required>
+    </div>
+
+    <div class="mb-3">
+    <label for="pilihan_kamar" class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
+    <select class="form-select" name="pilihan_kamar" required>
+    <option value="" disabled selected>Pilih tipe kamar hotel...</option>
+    <option value="standard">Standard Room (IDR 500k / Malam)</option>
+    <option value="deluxe">Deluxe Room (IDR 850k / Malam)</option>
+    <option value="suite">Executive Suite (IDR 1.5M / Malam)</option>
+</select>
+</div>
+
+                    <!-- BARIS CHECK IN & CHECK OUT (Sejajar horizontal) -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="check_in" class="form-label">Tanggal Check In</label>
+                            <input type="date" class="form-control" id="check_in" name="check_in" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="check_out" class="form-label">Tanggal Check Out</label>
+                            <input type="date" class="form-control" id="check_out" name="check_out" required>
+                        </div>
+                    </div>
+
+                    <!-- TOMBOL SUBMIT HITAM TEGAS -->
+                    <button type="submit" class="btn-submit shadow-sm">Pesan Sekarang</button>
+                </form>
+            </div>
+
         </div>
     </div>
 
