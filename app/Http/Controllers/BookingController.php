@@ -13,55 +13,56 @@ class BookingController extends Controller
         $standardBookings = Booking::where('pilihan_kamar', 'standard')->get();
         $deluxeBookings   = Booking::where('pilihan_kamar', 'deluxe')->get();
         $suiteBookings    = Booking::where('pilihan_kamar', 'suite')->get();
+$totalInventory = 150; // Kapasitas maksimal hotel
+        
+        // Menghitung jumlah baris data di database untuk tahu kamar yang terisi
+        $kamarTerisi    = Booking::count(); 
+        
+        // Sisa kamar tersedia adalah total inventory dikurangi yang terisi
+        $kamarTersedia  = $totalInventory - $kamarTerisi;
 
-        return view('admin.dashboard', compact('standardBookings', 'deluxeBookings', 'suiteBookings'));
+        // 3. LOGIKA MENGHITUNG ESTIMASI PENDAPATAN DARI BOOKING YANG LUNAS
+        $totalPendapatan = 0;
+        $semuaBookingLunas = Booking::where('status_bayar', 'Lunas')->get();
+
+        foreach ($semuaBookingLunas as $booking) {
+            // Hitung durasi malam menginap
+            $checkIn = \Carbon\Carbon::parse($booking->check_in);
+            $checkOut = \Carbon\Carbon::parse($booking->check_out);
+            $durasiMalam = $checkIn->diffInDays($checkOut);
+            
+            if ($durasiMalam == 0) { $durasiMalam = 1; } // Minimal hitung 1 malam
+
+            // Simulasi harga kamar per malam
+            $hargaPerMalam = match($booking->pilihan_kamar) {
+                'standard' => 300000,
+                'deluxe'   => 500000,
+                'suite'    => 1000000,
+                default    => 0
+            };
+
+            // Akumulasikan (Harga Kamar x Durasi) + Kode Unik Transfer
+            $totalPendapatan += ($hargaPerMalam * $durasiMalam) + ($booking->kode_unik ?? 0);
+        }
+
+        // Format tampilan rupiah ringkas (Contoh: IDR 42.5M)
+        $pendapatanFormatted = 'IDR ' . number_format($totalPendapatan / 1000000, 1, ',', '.') . 'M';
+        if ($totalPendapatan < 1000000) {
+            $pendapatanFormatted = 'IDR ' . number_format($totalPendapatan, 0, ',', '.');
+        }
+
+        // 4. MENGIRIM DATA LAMA DAN DATA STATISTIK BARU KE VIEW DASHBOARD
+        return view('admin.dashboard', compact(
+            'standardBookings', 
+            'deluxeBookings', 
+            'suiteBookings',
+            'totalInventory',
+            'kamarTerisi',
+            'kamarTersedia',
+            'pendapatanFormatted'
+        ));
     }
 
-    // Memproses input manual dari Form Check-In
-    public function store(Request $request)
-    {
-        // 1. Validasi Input Data
-        $request->validate([
-            'nama_tamu' => 'required|string|max:255',
-            'email_tamu' => 'required|email',
-            'pilihan_kamar' => 'required',
-            'check_in' => 'required|date',
-            'check_out' => 'required|date|after:check_in',
-        ]);
-
-
-        // 2. Logika acak nomor kamar otomatis sebagai contoh simulasi HMS
-        $randomRoom = match($request->pilihan_kamar) {
-            'standard' => 'Room #' . rand(101, 199),
-            'deluxe'   => 'Room #' . rand(201, 299),
-            'suite'    => 'Suite #' . rand(1, 50),
-        };
-        $kodeUnik = match($request->pilihan_kamar) {
-            'standard' => 50,   // Menghasilkan akhiran 050
-            'deluxe'   => 100,  // Menghasilkan akhiran 100
-            'suite'    => 150,  // Menghasilkan akhiran 150
-            default    => 0
-       };
-        // 3. Simpan data baru ke database table bookings
-        $booking = Booking::create([
-            'nama_tamu' => $request->nama_tamu,
-            'email_tamu' => $request->email_tamu,
-            'pilihan_kamar' => $request->pilihan_kamar,
-            'nomor_kamar' => $randomRoom,
-            'check_in' => $request->check_in,
-            'check_out' => $request->check_out,
-            'status_bayar' => 'Pending' 
-        ]);
-       
-        return redirect()->route('booking.pembayaran', $booking->id);
-    }
-
-    //  TAMBAHKAN FUNGSI BARU INI (Halaman Pembayaran)
-    public function pembayaran($id)
-    {
-        $booking = Booking::findOrFail($id);
-        return view('reservasi.pembayaran', compact('booking'));
-    }
 
     //  TAMBAHKAN FUNGSI BARU INI (Tombol "Saya Sudah Transfer")
     public function konfirmasi(Request $request, $id)
