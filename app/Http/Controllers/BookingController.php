@@ -52,16 +52,7 @@ class BookingController extends Controller
             'check_out' => $request->check_out,
             'status_bayar' => 'Pending' 
         ]);
-        
-        /* ❌ HAPUS BAGIAN INI KARENA MEMBUAT CODINGAN DOUBLE / DUPLIKAT:
-           
-           // 1. Ganti bagian akhir fungsi store Anda yang lama
-           public function store(Request $request)
-           {
-               $booking = Booking::create([ ... ]);
-        */
-
-        //  PERBAIKI DI SINI: Cukup panggil return redirect langsung ke halaman pembayaran
+       
         return redirect()->route('booking.pembayaran', $booking->id);
     }
 
