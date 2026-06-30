@@ -77,3 +77,7 @@ Route::get('/beach-club', function () {
 Route::get('/wellness', function () {
     return view('wellness.index');
 })->name('wellness.index');
+Route::get('/booking/pembayaran/{id}', [BookingController::class, 'pembayaran'])->name('booking.pembayaran');
+
+// Route untuk memproses aksi tombol "Saya Sudah Transfer"
+Route::post('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi'])->name('booking.konfirmasi');
