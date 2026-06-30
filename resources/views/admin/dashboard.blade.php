@@ -100,8 +100,92 @@
 </head>
 <body>
 
+
     <div class="container-fluid p-0">
         <div class="row g-0">
+
+    <nav class="navbar-admin shadow-sm mb-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-decoration-none" href="#">
+                <i class="bi bi-building-gear me-2"></i> Horizon Property Management System
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-secondary-subtle text-light px-3 py-2 border border-secondary">Role: Administrator</span>
+                <a href="/" class="btn btn-sm btn-light rounded-pill px-3"><i class="bi bi-globe"></i> Lihat Web Tamu</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+        <div class="row align-items-center mb-4">
+            <div class="col">
+                <h2 class="fw-bold" style="font-family: 'Playfair Display', serif;">Hotel Occupancy Overview</h2>
+                <p class="text-muted small mb-0">Status real-time ketersediaan operasional dari total kamar hotel.</p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="card stat-card p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase d-block mb-1">Total Inventory</span>
+                            <h3 class="fw-bold m-0 text-dark">150 Kamar</h3>
+                        </div>
+                        <div class="icon-box bg-primary-subtle text-primary"><i class="bi bi-building"></i></div>
+                    </div>
+                </div>
+            <a href="/admin/manajemen" class="nav-link active">
+        <i class="bi bi-door-open"></i> Manajemen Kamar
+    </a>
+</li>
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase d-block mb-1">Kamar Terisi (Occ)</span>
+                            <h3 class="fw-bold m-0 text-danger">87 Kamar</h3>
+                        </div>
+                        <div class="icon-box bg-danger-subtle text-danger"><i class="bi bi-door-closed-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card stat-card p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase d-block mb-1">Kamar Tersedia (Vacant)</span>
+                            <h3 class="fw-bold m-0 text-success">63 Kamar</h3>
+                        </div>
+                        <div class="icon-box bg-success-subtle text-success"><i class="bi bi-door-open-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card stat-card p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-bold text-uppercase d-block mb-1">Pendapatan Hari Ini</span>
+                            <h3 class="fw-bold m-0 text-dark">IDR 42.5M</h3>
+                        </div>
+                        <div class="icon-box bg-warning-subtle text-warning"><i class="bi bi-wallet2"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="fw-bold mb-3" style="font-family: 'Playfair Display', serif;"><i class="bi bi-list-stars text-teal"></i> Manajer Log Transaksi Tamu</h4>
+        
+        <ul class="nav nav-tabs border-0" id="roomTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="standard-tab" data-bs-toggle="tab" data-bs-target="#standard" type="button" role="tab">Standard Room (Sisa: 20)</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="deluxe-tab" data-bs-toggle="tab" data-bs-target="#deluxe" type="button" role="tab">Deluxe Room (Sisa: 28)</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="suite-tab" data-bs-toggle="tab" data-bs-target="#suite" type="button" role="tab">Executive Suite (Sisa: 15)</button>
+            </li>
+        </ul>
+<div class="tab-content" id="roomTabsContent">
+>>>>>>> 69839e7 (crud manajemen kamar)
             
             <div class="col-md-3 col-lg-2 sidebar p-3 position-fixed start-0 top-0 bottom-0">
                 <div class="d-flex align-items-center gap-2 mb-4 px-2 pt-2">
