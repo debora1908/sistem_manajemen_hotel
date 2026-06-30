@@ -116,7 +116,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center w-100">
                 <a href="{{ route('home') }}" class="navbar-brand-custom">
-                    <i class="bi bi-water"></i> Five Star Horizon Hotel
+                    <i class="bi bi-water"></i> Nirwana Hotel
                 </a>
                 <div>
                     <a href="{{ route('home') }}" class="nav-link-custom me-4"><i class="bi bi-house-door"></i> Beranda</a>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Data Reservasi - Five Star Horizon Hotel</title>
+    <title>Daftar Data Reservasi - Nirwana Hotel</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 
     <header class="w-full px-6 py-4 md:px-12 flex justify-between items-center bg-white shadow-xs border-b border-slate-100">
         <div class="text-base font-semibold text-slate-800 tracking-wide">
-            Five Star Horizon Hotel — Admin Dashboard
+            Nirwana Hotel — Admin Dashboard
         </div>
         <div class="flex space-x-6 text-xs font-medium">
             <a href="{{ url('/') }}" class="text-slate-500 hover:text-slate-800 transition">Beranda</a>
