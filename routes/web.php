@@ -1,10 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\AuthController;
+
+// Halaman Utama / Landing Page
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+// Rute Pembayaran Booking
+Route::get('/booking/pembayaran/{id}', [BookingController::class, 'pembayaran']);
 
 // Halaman Utama / Landing Page
 Route::get('/', function () {
@@ -81,3 +90,7 @@ Route::get('/booking/pembayaran/{id}', [BookingController::class, 'pembayaran'])
 
 // Route untuk memproses aksi tombol "Saya Sudah Transfer"
 Route::post('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi'])->name('booking.konfirmasi');
+
+
+// Pastikan rute ini sudah terdaftar
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
