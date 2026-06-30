@@ -3,112 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manajemen Kamar - E-Hotel Mgt</title>
+    <title>Suites Management - Five Star Horizon Hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { display: flex; background-color: #f8f9fa; height: 100vh; overflow: hidden; }
-        
-        /* Sidebar - Sama Persis dengan Dashboard Utama Kamu */
-        .sidebar { width: 240px; background-color: #212529; color: #adb5bd; display: flex; flex-direction: column; }
-        .sidebar-brand { padding: 25px 20px; font-size: 18px; font-weight: bold; color: white; border-bottom: 1px solid #343a40; }
-        .sidebar-menu { list-style: none; padding: 20px 0; }
-        .sidebar-menu li a { display: block; padding: 12px 20px; color: #adb5bd; text-decoration: none; font-size: 14px; }
-        .sidebar-menu li.active a { background-color: #0d6efd; color: white; border-radius: 4px; margin: 0 10px; }
-        
-        /* Bagian Konten Tengah */
-        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .header-content h2 { font-size: 22px; color: #212529; font-weight: 600; }
-        
-        /* Tombol Tambah Kamar Baru */
-        .btn-add-kamar { background-color: #0d6efd; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; text-decoration: none; font-weight: 500; }
-        .btn-add-kamar:hover { background-color: #0b5ed7; }
-        
-        /* Desain Tabel Data Kamar */
-        .table-section { background-color: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
-        th { background-color: #f8f9fa; color: #495057; padding: 12px; font-weight: 600; border-bottom: 1px solid #dee2e6; }
-        td { padding: 15px 12px; border-bottom: 1px solid #dee2e6; color: #495057; }
-        
-        /* Status Kamar */
-        .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; color: white; }
-        .status-badge.kosong { background-color: #198754; }
-        .status-badge.terisi { background-color: #dc3545; }
-
-        /* Tombol Aksi CRUD */
-        .btn-aksi { text-decoration: none; font-weight: 600; font-size: 13px; margin-right: 10px; }
-        .btn-edit { color: #ffc107; }
-        .btn-hapus { color: #dc3545; background: none; border: none; cursor: pointer; font-weight: 600; font-size: 13px; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f4f7f9;
+            color: #2D3748;
+        }
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 0;
+        }
+        .navbar-brand, .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        .navbar-brand { color: #0E7490; }
+        .section-title { color: #0F766E; }
+        .card-custom {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(14, 116, 144, 0.03);
+        }
+        .form-label { font-size: 12px; letter-spacing: 0.5px; color: #718096; }
+        .form-control, .form-select {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            border-radius: 8px;
+            padding: 11px;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #ffffff;
+            border-color: #0E7490;
+            box-shadow: 0 0 0 0.25rem rgba(14, 116, 144, 0.15);
+        }
+        .btn-bali {
+            background-color: #0E7490;
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 13px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-bali:hover { background-color: #0F766E; color: white; }
+        .table-custom th {
+            background-color: #f1f5f9;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 14px;
+            font-size: 13px;
+        }
+        .table-custom td { padding: 16px; border-bottom: 1px solid #f1f5f9; }
+        .badge-available { background-color: #ccfbf1; color: #0f766e; border: 1px solid #99f6e4; }
+        .badge-occupied { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
     </style>
 </head>
 <body>
 
-    <!-- SIDEBAR (Menu Tetap Stay Menemani) -->
-    <div class="sidebar">
-        <div class="sidebar-brand">🏢 E-Hotel Mgt</div>
-        <ul class="sidebar-menu">
-            <li><a href="/dashboard">📊 Dashboard</a></li>
-            <!-- Menu Manajemen Kamar Aktif (Berwarna Biru) -->
-            <li class="active"><a href="/kamar">🛏️ Manajemen Kamar</a></li>
-            <li><a href="/admin/reservasi">📖 Reservasi Tamu</a></li>
-            <li><a href="#">👥 Pengguna</a></li>
-        </ul>
-    </div>
-
-    <!-- KONTEN UTAMA MANAJEMEN KAMAR (Muncul di Sebelah Kanan Sidebar) -->
-    <div class="main-content">
-        <div class="header-content">
-            <h2>Manajemen Data Kamar</h2>
-            <!-- Klik tombol ini akan membuka form buat tambah kamar baru -->
-            <a href="{{ route('kamar.create') }}" class="btn-add-kamar">+ Tambah Kamar Baru</a>
+    <nav class="navbar navbar-expand-lg mb-5 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/"><i class="bi bi-water"></i> Five Star Horizon </a>
+            <div>
+                <a href="/reservasi" class="btn btn-outline-cyan btn-sm me-3 text-info"><i class="bi bi-calendar2-check"></i> Menu Reservasi</a>
+                <a href="/" class="text-secondary text-decoration-none small"><i class="bi bi-arrow-left"></i> Kembali</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="table-section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nomor Kamar</th>
-                        <th>Tipe Kamar</th>
-                        <th>Harga Per Malam</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($kamars as $index => $kamar)
-                    <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td><strong>{{ $kamar->nomor_kamar }}</strong></td>
-                        <td>{{ $kamar->tipe_kamar }}</td>
-                        <td>Rp {{ number_format($kamar->harga_per_malam, 0, ',', '.') }}</td>
-                        <td>
-                            @if($kamar->status == 'Terisi')
-                                <span class="status-badge terisi">🔴 Terisi</span>
-                            @else
-                                <span class="status-badge kosong">🟢 Kosong</span>
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('kamar.edit', $kamar->id) }}" class="btn-aksi btn-edit">Edit</a>
-                            <form action="{{ route('kamar.destroy', $kamar->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus kamar ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-hapus">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="6" style="text-align: center; color: #6c757d; font-style: italic; padding: 30px;">
-                            🛏 Rose! Belum ada data kamar ditemukan. Silakan klik "+ Tambah Kamar Baru" untuk mengisi.
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card-custom">
+                    <h5 class="section-title mb-4"><i class="bi bi-plus-circle-fill"></i> Add Luxury Suite</h5>
+                    <form action="{{ route('kamar.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label fw-bold uppercase">NOMOR KAMAR / VILLA</label>
+                            <input type="text" name="nomor_kamar" class="form-control" placeholder="Contoh: 301" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">TIPE SUITE</label>
+                            <select name="tipe_kamar" class="form-select" required>
+                                <option value="Standard">Ocean Standard</option>
+                                <option value="Deluxe">Beachfront Deluxe</option>
+                                <option value="Suite">Private Pool Suite</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">HARGA PER MALAM (IDR)</label>
+                            <input type="number" name="harga_per_malam" class="form-control" placeholder="Rp" required>
+                        </div>
+                        <button type="submit" class="btn btn-bali w-100 shadow-sm mt-2">Publish Room</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card-custom">
+                    <h5 class="section-title mb-4"><i class="bi bi-grid-3x3-gap-fill"></i> Resort Directory Logs</h5>
+                    <div class="table-responsive">
+                        <table class="table table-custom align-middle">
+                            <thead>
+                                <tr>
+                                    <th>No. Kamar</th>
+                                    <th>Tipe Kamar</th>
+                                    <th>Harga / Malam</th>
+                                    <th>Status Kamar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($kamars as $kamar)
+                                    <tr>
+                                        <td class="fw-bold text-dark fs-5">{{ $kamar->nomor_kamar }}</td>
+                                        <td class="text-secondary fw-medium">{{ $kamar->tipe_kamar }}</td>
+                                        <td class="fw-bold text-info">Rp {{ number_format($kamar->harga_per_malam, 0, ',', '.') }}</td>
+                                        <td>
+                                            <span class="badge {{ $kamar->status == 'Tersedia' ? 'badge-available' : 'badge-occupied' }}">
+                                                {{ $kamar->status }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr><td colspan="4" class="text-center text-muted py-5">No rooms registered in the sanctuary database.</td></tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 </html>

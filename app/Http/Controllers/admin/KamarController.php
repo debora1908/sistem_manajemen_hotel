@@ -1,77 +1,69 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Kamar; // Sesuaikan dengan nama Model Kamar Anda
+use Illuminate\Http\Request;
+
+class KamarController extends Controller
 {
+    // 1. READ: Menampilkan data kamar yang sudah ada ke halaman admin
     public function index()
     {
-        $kamars = DB::table('kamars')->get();
-        return view('kamar.index', compact('kamars'));
+        $kamars = Kamar::latest()->get();
+        return view('admin.kamar.index', compact('kamars'));
     }
 
-    // 1. Fungsi untuk menampilkan halaman form tambah kamar
+    // 2. CREATE: Menampilkan form tambah kamar
     public function create()
     {
-        return view('kamar.create');
+        return view('admin.kamar.create');
     }
 
-    // 2. Fungsi untuk menerima inputan form dan menyimpannya ke database
+    // 3. STORE: Memproses simpan kamar baru
     public function store(Request $request)
     {
-        // Validasi inputan agar tidak boleh kosong
         $request->validate([
-            'nomor_kamar' => 'required',
+            'nomor_kamar' => 'required|unique:kamars,nomor_kamar',
             'tipe_kamar' => 'required',
             'harga_per_malam' => 'required|numeric',
         ]);
 
-        // Masukkan data baru ke tabel kamars
-        DB::table('kamars')->insert([
-            'nomor_kamar' => $request->nomor_kamar,
-            'tipe_kamar' => $request->tipe_kamar,
-            'harga_per_malam' => $request->harga_per_malam,
-            'status' => 'Kosong', // Standar awal selalu kosong
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        Kamar::create($request->all());
 
-        // Kembalikan ke halaman utama manajemen kamar dengan pesan sukses
-        return redirect()->route('kamar.index')->with('sukses', 'Kamar berhasil ditambahkan!');
-    }public function edit($id)
-    {
-        $kamar = DB::table('kamars')->where('id', $id)->first();
-        return view('kamar.edit', compact('kamar'));
+        return redirect()->route('admin.kamar.index')->with('success', 'Kamar baru berhasil ditambahkan!');
     }
 
-    // 3. UPDATE: Memperbarui data di database
+    // 4. EDIT: Menampilkan form edit kamar lama
+    public function edit($id)
+    {
+        $kamar = Kamar::findOrFail($id);
+        return view('admin.kamar.edit', compact('kamar'));
+    }
+
+    // 5. UPDATE: Memproses perubahan data kamar
     public function update(Request $request, $id)
     {
+        $kamar = Kamar::findOrFail($id);
+
         $request->validate([
-            'nomor_kamar' => 'required',
+            'nomor_kamar' => 'required|unique:kamars,nomor_kamar,' . $kamar->id,
             'tipe_kamar' => 'required',
             'harga_per_malam' => 'required|numeric',
-            'status' => 'required',
         ]);
 
-        DB::table('kamars')->where('id', $id)->update([
-            'nomor_kamar' => $request->nomor_kamar,
-            'tipe_kamar' => $request->tipe_kamar,
-            'harga_per_malam' => $request->harga_per_malam,
-            'status' => $request->status,
-            'updated_at' => now(),
-        ]);
+        $kamar->update($request->all());
 
-        return redirect()->route('kamar.index')->with('sukses', 'Data kamar berhasil diperbarui!');
+        return redirect()->route('admin.kamar.index')->with('success', 'Data kamar berhasil diperbarui!');
     }
 
-    // 4. DELETE: Menghapus data kamar
+    // 6. DELETE: Menghapus data kamar
     public function destroy($id)
     {
-        DB::table('kamars')->where('id', $id)->delete();
-        return redirect()->route('kamar.index')->with('sukses', 'Kamar berhasil dihapus!');
-    }
+        $kamar = Kamar::findOrFail($id);
+        $kamar->delete();
 
+        return redirect()->route('admin.kamar.index')->with('success', 'Kamar berhasil dihapus!');
+    }
 }
