@@ -36,7 +36,12 @@ class BookingController extends Controller
             'deluxe'   => 'Room #' . rand(201, 299),
             'suite'    => 'Suite #' . rand(1, 50),
         };
-
+        $kodeUnik = match($request->pilihan_kamar) {
+            'standard' => 50,   // Menghasilkan akhiran 050
+            'deluxe'   => 100,  // Menghasilkan akhiran 100
+            'suite'    => 150,  // Menghasilkan akhiran 150
+            default    => 0
+       };
         // 3. Simpan data baru ke database table bookings
         $booking = Booking::create([
             'nama_tamu' => $request->nama_tamu,
