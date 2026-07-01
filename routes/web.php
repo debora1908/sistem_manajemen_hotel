@@ -6,6 +6,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\KamarController; 
 use App\Http\Controllers\Admin\KamarController as AdminKamarController; 
+use App\Http\Controllers\Admin\ReservasiController as AdminReservasiController;
 
 /* SISI PUBLIK */
 Route::get('/', function () {
