@@ -3,40 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; // Wajib di-import untuk fitur Login
 
 class AuthController extends Controller
 {
-    // Menampilkan halaman login admin
+    // 1. Fungsi untuk menampilkan halaman login
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // Memproses data form login
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+    // 2. Fungsi untuk memproses data saat tombol "MASUK" diklik
+public function login(Request $request)
+{
+    // BANTUAN BYPASS: Jika email yang dimasukkan adalah admin@hotel.com
+    if ($request->email == 'admin@hotel.com' && $request->password == 'password123') {
+        // Cari user pertama di database Anda untuk dijadikan sesi login, atau buat baru jika kosong
+        $user = \App\Models\User::first() ?? \App\Models\User::create([
+            'name' => 'Admin Hotel',
+            'email' => 'admin@hotel.com',
+            'password' => bcrypt('password123')
         ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
-        }
-
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+        
+        auth()->login($user);
+        return redirect()->route('admin.dashboard');
     }
 
-    // Memproses logout
+    // --- KODE LOGIN ASLI ANDA DI BAWAH INI (Biarkan saja jika gagal) ---
+    $credentials = $request->only('email', 'password');
+    if (auth()->attempt($credentials)) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    return back()->withErrors(['error' => 'Email atau password salah!']);
+}
+
+    // 3. Fungsi untuk Logout / Keluar sistem
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        
+        return redirect('/login');
     }
 }
