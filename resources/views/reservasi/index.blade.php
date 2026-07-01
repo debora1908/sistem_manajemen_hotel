@@ -168,10 +168,9 @@
             <div class="mb-3">
                 <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
                 <select name="kamar_id" class="form-select" required>
-                    <option value="">Pilih tipe kamar hotel...</option>
-                    <option value="standard">Standard Room - Rp 500.000</option>
-                    <option value="deluxe">Deluxe Room - Rp 1.000.000</option>
-                    <option value="excecutif">Excecutif Room - Rp 1.500.000</option>
+                <option value="standard">Standard Room</option>
+    <option value="deluxe">Deluxe Room </option>
+    <option value="suite">Executive Suite </option>
                 </select>
             </div>
 

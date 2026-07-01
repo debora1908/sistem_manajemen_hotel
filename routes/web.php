@@ -1,107 +1,37 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\KamarController;
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\KamarController; 
+use App\Http\Controllers\Admin\KamarController as AdminKamarController; 
 
-// Halaman Utama / Landing Page
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-// Rute Pembayaran Booking
-Route::get('/booking/pembayaran/{id}', [BookingController::class, 'pembayaran']);
-
-// Halaman Utama / Landing Page
-Route::get('/', function () {
-    return view('welcome'); 
-})->name('home');
-
-// Halaman Form Reservasi Kamar (Langsung panggil view karena opsi kamar sudah manual)
-Route::get('/reservasi', function () {
-    return view('reservasi.index'); 
-})->name('reservasi.index');
-
-// Proses Kiriman Data Form Reservasi (Tombol "Pesan Sekarang")
+/* SISI PUBLIK */
+Route::get('/', function () { return view('welcome'); });
+Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
+Route::post('/kamar', [KamarController::class, 'store'])->name('kamar.store');
+Route::get('/reservasi', [ReservasiController::class, 'index'])->name('reservasi.index');
 Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
 
-
+/* SISI BOOKING & AUTH */
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.proses');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-
-
-// Halaman Utama Dashboard Ringkasan Hotel Admin
-Route::get('/dashboard', [HotelController::class, 'dashboard'])->name('dashboard');
-
-// Halaman Tabel Daftar Reservasi Tamu
-Route::get('/reservasi/daftar', function () {
-    return view('reservasi.daftar');
-})->name('reservasi.daftar');
-
-// Mengarahkan langsung ke file views/admin/dashboard.blade.php
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
-
-// Halaman Admin Reservasi
-Route::get('/admin/reservasi', [ReservasiController::class, 'adminIndex'])->name('reservasi.admin');
-
-// Data Kamar
-Route::get('/data-kamar', [HotelController::class, 'dataKamar'])->name('kamar');
-
-
-Route::prefix('admin')->as('admin.')->group(function() {
-
-    // Tampil Semua Kamar -> Berubah nama menjadi: admin.kamar.index
-    Route::get('/kamar', [KamarController::class, 'index'])->name('kamar.index');
-
-    // Form Tambah Kamar & Proses Simpan -> Berubah nama menjadi: admin.kamar.create & admin.kamar.store
-    Route::get('/kamar/create', [KamarController::class, 'create'])->name('kamar.create');
-    Route::post('/kamar/store', [KamarController::class, 'store'])->name('kamar.store');
-
-    // Form Edit Kamar & Proses Update -> Berubah nama menjadi: admin.kamar.edit & admin.kamar.update
-    Route::get('/kamar/{id}/edit', [KamarController::class, 'edit'])->name('kamar.edit');
-    Route::put('/kamar/{id}', [KamarController::class, 'update'])->name('kamar.update');
-
-    // Proses Hapus Kamar -> Berubah nama menjadi: admin.kamar.destroy
-    Route::delete('/kamar/{id}', [KamarController::class, 'destroy'])->name('kamar.destroy');
-
-});
-
-
-Route::get('/villas', function () {
-    return view('villas.index');
-})->name('villas.index');
-
-Route::get('/beach-club', function () {
-    return view('beach-club.index');
-})->name('beachclub.index');
-
-Route::get('/wellness', function () {
-    return view('wellness.index');
-})->name('wellness.index');
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/pembayaran/{id}', [BookingController::class, 'pembayaran'])->name('booking.pembayaran');
-
-// Route untuk memproses aksi tombol "Saya Sudah Transfer"
 Route::post('/booking/konfirmasi/{id}', [BookingController::class, 'konfirmasi'])->name('booking.konfirmasi');
 
+/* SISI DASHBOARD & MANAGEMENT ADMIN */
+Route::get('/admin/dashboard', [BookingController::class, 'index'])->name('admin.dashboard');
 
-// Pastikan rute ini sudah terdaftar
-Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-Route::get('/pengguna', [PenggunaController::class,'index'])->name('pengguna.index');
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/manajemen', [AdminKamarController::class, 'index'])->name('manajemen.index');
+    Route::post('/manajemen', [AdminKamarController::class, 'store'])->name('manajemen.store');
+    Route::put('/manajemen/{id}', [AdminKamarController::class, 'update'])->name('manajemen.update');
+    Route::delete('/manajemen/{id}', [AdminKamarController::class, 'destroy'])->name('manajemen.destroy');
+});
 
-Route::post('/pengguna', [PenggunaController::class,'store'])->name('pengguna.store');
-
-Route::get('/pengguna/{id}', [PenggunaController::class,'show'])->name('pengguna.show');
-
-Route::put('/pengguna/{id}', [PenggunaController::class,'update'])->name('pengguna.update');
-
-Route::delete('/pengguna/{id}', [PenggunaController::class,'destroy'])->name('pengguna.destroy');
-
-Route::put('/pengguna/reset/{id}', [PenggunaController::class,'resetPassword'])->name('pengguna.reset');
+Route::get('/booking/{id}/edit', [BookingController::class, 'edit'])->name('booking.edit');
+Route::put('/booking/{id}', [BookingController::class, 'update'])->name('booking.update');
+Route::delete('/booking/{id}', [BookingController::class, 'destroy'])->name('booking.destroy');
