@@ -156,7 +156,18 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-3">
-                    <input type="text" class="form-control w-50" placeholder="Cari pengguna...">
+                    <form action="{{ route('admin.pengguna.index') }}" method="GET" class="d-flex w-100">
+    <input type="text"
+           name="search"
+           class="form-control me-2"
+           placeholder="Cari nama, email atau username..."
+           value="{{ request('search') }}">
+
+    <button class="btn btn-primary">
+        <i class="bi bi-search"></i>
+        Cari
+    </button>
+</form>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">
                         <i class="bi bi-plus-circle"></i> Tambah Pengguna
                     </button>
