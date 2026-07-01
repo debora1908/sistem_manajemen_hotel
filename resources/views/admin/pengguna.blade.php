@@ -18,7 +18,7 @@
 <body>
 
     <div class="sidebar">
-        <div class="fs-4 fw-bold mb-4">🏨 E-Hotel Mgt</div>
+        <div class="fs-4 fw-bold mb-4">🏨 E-Hotel NIRWANA</div>
         <ul class="nav flex-column menu">
            <li class="nav-item">
     <a href="{{ route('admin.dashboard') }}" class="nav-link">

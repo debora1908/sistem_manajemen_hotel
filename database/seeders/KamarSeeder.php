@@ -7,25 +7,27 @@ use Illuminate\Support\Facades\DB;
 
 class KamarSeeder extends Seeder
 {
-    public function run(): void
+   public function run(): void
     {
-        DB::table('kamars')->insert([
-            [
-                'nomor_kamar' => 'Room 302',
-                'tipe_kamar' => 'Deluxe Room',
-                'harga' => 500000,
-                'status' => 'Tersedia',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nomor_kamar' => 'Room 303',
-                'tipe_kamar' => 'Executive Club Suite',
-                'harga' => 1200000,
-                'status' => 'Pembersihan',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
+        Kamar::create([
+            'nomor_kamar' => '101',
+            'tipe_kamar' => 'standard',
+            'harga_per_malam' => 500000,
+            'status' => 'Tersedia'
+        ]);
+
+        Kamar::create([
+            'nomor_kamar' => '102',
+            'tipe_kamar' => 'deluxe',
+            'harga_per_malam' => 750000,
+            'status' => 'Tersedia'
+        ]);
+
+        Kamar::create([
+            'nomor_kamar' => '201',
+            'tipe_kamar' => 'executive',
+            'harga_per_malam' => 1500000,
+            'status' => 'Tersedia'
         ]);
     }
 }

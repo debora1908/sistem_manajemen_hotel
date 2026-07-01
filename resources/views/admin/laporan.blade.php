@@ -75,7 +75,7 @@ body{
 
 <div class="sidebar">
 
-<h3 class="mb-4">🏨 E-Hotel</h3>
+<h3 class="mb-4">🏨 E-Hotel NIRWANA</h3>
 <li class="nav-item">
     <a href="{{ route('admin.dashboard') }}" class="nav-link">
         <i class="bi bi-speedometer2"></i> Dashboard

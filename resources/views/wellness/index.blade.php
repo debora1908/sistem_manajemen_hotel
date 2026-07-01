@@ -70,7 +70,7 @@
 <!-- NAVIGASI UTAMA KONSISTEN -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/" style="font-family: 'Playfair Display', serif; color: #0E7490;"><i class="bi bi-water"></i> Five Star Horizon Hotel</a>
+            <a class="navbar-brand fw-bold" href="/" style="font-family: 'Playfair Display', serif; color: #0E7490;"><i class="bi bi-water"></i> NIRWANA Hotel</a>
             
             <!-- Menu Tengah yang Tetap Aktif -->
             <div class="mx-auto">

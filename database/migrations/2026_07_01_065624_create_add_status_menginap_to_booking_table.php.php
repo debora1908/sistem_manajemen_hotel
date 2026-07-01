@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+   public function up(): void
     {
         Schema::table('bookings', function (Blueprint $table) {
             $table->string('status_menginap')
-                  ->default('Belum Check In')
-                  ->after('status_bayar');
+                  ->default('Belum Check In');
         });
     }
 

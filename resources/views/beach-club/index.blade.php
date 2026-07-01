@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Horizon Beach Club - Nirwana Hotel</title>
+    <title>The NIRWANA Beach Club - NIRWANA Horizon Hotel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -68,19 +68,30 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg shadow-sm mb-5">
+    <!-- NAVIGASI UTAMA KONSISTEN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/"><i class="bi bi-water"></i> Five Star Horizon Hotel</a>
+            <a class="navbar-brand fw-bold" href="/" style="font-family: 'Playfair Display', serif; color: #0E7490;"><i class="bi bi-water"></i>NIRWANA Hotel</a>
+            
+            <!-- Menu Tengah yang Tetap Aktif -->
+            <div class="mx-auto">
+                <ul class="navbar-nav d-flex flex-row gap-4">
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('villas.index') }}">Villas</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="{{ route('beachclub.index') }}" style="color: #0E7490; border-bottom: 2px solid #0E7490;">Beach Club</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('wellness.index') }}">Wellness</a></li>
+                </ul>
+            </div>
+
             <div>
-                <a href="/" class="text-secondary text-decoration-none small me-3"><i class="bi bi-house"></i> Beranda</a>
-                <a href="{{ route('reservasi.index') }}" class="btn btn-sm btn-dark">Book A Stay</a>
+                <a href="/reservasi" class="btn btn-sm btn-dark px-3 rounded-pill">Book A Stay</a>
             </div>
         </div>
     </nav>
 
     <div class="container mb-5">
         <div class="text-center mb-5">
-            <h1 class="section-title">The Horizon Beach Club</h1>
+            <h1 class="section-title">The NIRWANA Beach Club</h1>
             <p class="text-muted">Rasakan suasana tepi laut terbaik di Bali dengan pemandangan matahari terbenam yang memukau.</p>
         </div>
 

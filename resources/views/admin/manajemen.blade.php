@@ -150,7 +150,7 @@
 
 
     <div class="sidebar">
-        <div class="fs-4 fw-bold mb-4">🏨 E-Hotel Mgt</div>
+        <div class="fs-4 fw-bold mb-4">🏨 NIRWANA</div>
         <ul class="nav flex-column menu">
            <li class="nav-item">
     <a href="{{ route('admin.dashboard') }}" class="nav-link">
@@ -293,13 +293,13 @@
                                     Terisi
                                 </span>
 
-                            @else
+                           @elseif($kamar->status=="Perbaikan")
 
-                                <span class="badge bg-warning text-dark badge-status">
-                                    Sedang Diperbaiki
-                                </span>
+<span class="badge bg-warning text-dark badge-status">
+    Sedang Diperbaiki
+</span>
 
-                            @endif
+@endif
 
                         </div>
 
@@ -535,10 +535,10 @@ Simpan
                             Kotor
                         </option>
 
-                        <option value="Sedang Diperbaiki"
-                        {{ $kamar->status=='Sedang Diperbaiki' ? 'selected' : '' }}>
-                            Sedang Diperbaiki
-                        </option>
+                       <option value="Perbaikan"
+{{ $kamar->status=='Perbaikan' ? 'selected' : '' }}>
+    Sedang Diperbaiki
+</option>
 
                     </select>
 
@@ -583,7 +583,7 @@ Simpan
 const daftarHarga = {
     "Standard":500000,
     "Deluxe Room":750000,
-    "Executive Suite":1200000
+    "Executive Suite":1500000
 };
 
 function updateHarga(){
