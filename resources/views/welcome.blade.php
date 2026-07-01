@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nirwana Hotel- Medan Theme</title>
+    <title>Five Star Horizon Hotel - Bali Theme</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -97,18 +97,36 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="bi bi-water"></i>Nirwana Hotel</a>
-            <div class="collapse navbar-collapse justify-content-center">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('villas.index') }}">Villas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('beachclub.index') }}">Beach Club</a></li>
+            <a class="navbar-brand fw-bold" href="/"><i class="bi bi-water"></i> Nirwana  Hotel</a>
+            
+            <div class="mx-auto">
+                <ul class="navbar-nav d-flex flex-row gap-4">
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/" style="color: #0E7490; border-bottom: 2px solid #0E7490;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('about_us.index') }}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('villas.index') }}">Villas</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('beachclub.index') }}">Beach Club</a></li>
                     <li class="nav-item"><a class="nav-link text-secondary fw-medium" href="{{ route('wellness.index') }}">Wellness</a></li>
                 </ul>
             </div>
-            <a href="{{ route('reservasi.index') }}" class="btn btn-bali shadow-sm">Book A Stay</a>
+
+            
+               
+              <div class="d-flex gap-2">
+
+    <button class="btn btn-outline-primary rounded-pill"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal">
+        Login
+    </button>
+
+    <a href="/reservasi" class="btn btn-sm btn-dark px-3 rounded-pill">
+        Book A Stay
+    </a>
+
+</div>  
+            </div>
         </div>
     </nav>
 
@@ -119,7 +137,60 @@
             <a href="{{ route('reservasi.index') }}" class="btn-explore">Discover Our Suites</a>
         </div>
     </div>
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1">
 
+<div class="modal-dialog modal-dialog-centered">
+
+<div class="modal-content border-0 rounded-4 shadow-lg">
+
+<div class="modal-header bg-primary text-white">
+
+<h5 class="modal-title">
+<i class="bi bi-person-circle"></i>
+Pilih Login
+</h5>
+
+<button type="button"
+class="btn-close btn-close-white"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body text-center p-4">
+
+<h4 class="fw-bold mb-4">
+Selamat Datang
+</h4>
+
+<p class="text-muted mb-4">
+Silakan pilih jenis akses yang ingin digunakan.
+</p>
+
+<a href="{{ route('login') }}"
+class="btn btn-primary w-100 py-3 rounded-3 mb-3">
+
+<i class="bi bi-shield-lock-fill"></i>
+
+Login Admin
+
+</a>
+
+<a href="{{ route('user.login') }}"
+class="btn btn-success w-100 py-3 rounded-3">
+
+<i class="bi bi-person-fill"></i>
+
+Masuk Sebagai User
+
+</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

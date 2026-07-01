@@ -115,82 +115,6 @@
         </div>
     </nav>
 
-<<<<<<< HEAD
-    <!-- KONTEN UTAMA FORM RESERVASI -->
-    <div class="main-container">
-        <div class="booking-card">
-            <div class="row g-0">
-                <!-- Bagian Kiri: Gambar Banner -->
-                <div class="col-md-5 d-none d-md-block">
-                    <div class="img-sidebar">
-                        <div>
-                            <span class="badge bg-warning text-dark fw-bold mb-2 text-uppercase tracking-wider" style="font-size: 0.75rem;">Exclusive Stay</span>
-                            <h2 class="card-title-hotel fs-1 mt-1">Tropical Paradise</h2>
-                            <p class="small text-white-50 mt-3">Satu langkah lagi untuk menikmati kemewahan menginap terbaik dengan pemandangan langsung ke pantai tropis Bali.</p>
-                        </div>
-                        <div class="small"><i class="bi bi-geo-alt-fill text-warning"></i> Badung, Bali, Indonesia</div>
-                    </div>
-                </div>
-                
-                <!-- Bagian Kanan: Form Input -->
-                <div class="col-md-7">
-    <div class="form-section">
-        
-        <!-- Wadah Notifikasi Sukses -->
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
-                <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-
-        <div class="mb-4">
-            <h2 class="form-title mb-1">Form Reservasi Hotel</h2>
-            <p class="text-muted small">Silakan isi detail data masa inap Anda dengan benar.</p>
-        </div>
-
-        <form action="{{ route('reservasi.store') }}" method="POST">
-            @csrf
-
-            <!-- Input Nama -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small text-secondary">NAMA TAMU</label>
-                <input type="text" name="nama_tamu" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
-            </div>
-
-            <!-- Input Email -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small text-secondary">EMAIL TAMU</label>
-                <input type="email" name="email" class="form-control" placeholder="Masukkan email aktif Anda" required>
-            </div>
-
-            <!-- Pilihan Tipe Kamar (Sudah bersih dari karakter nyasar) -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small text-secondary">PILIHAN TIPE KAMAR</label>
-                <select name="kamar_id" class="form-select" required>
-                <option value="standard">Standard Room</option>
-    <option value="deluxe">Deluxe Room </option>
-    <option value="suite">Executive Suite </option>
-                </select>
-            </div>
-
-            <!-- Input Tanggal (Sejajar Grid) -->
-            <div class="row g-3 mb-4">
-                <div class="col-6">
-                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK IN</label>
-                    <input type="date" name="tanggal_checkin" class="form-control" required>
-                </div>
-                <div class="col-6">
-                    <label class="form-label fw-bold small text-secondary">TANGGAL CHECK OUT</label>
-                    <input type="date" name="tanggal_checkout" class="form-control" required>
-                </div>
-            </div>
-
-            <!-- Tombol Pesan -->
-            <button type="submit" class="btn btn-hotel w-100 shadow-sm text-uppercase">Pesan Sekarang</button>
-        </form>
-        
-=======
     <!-- CONTAINER RESERVASI UTAMA -->
     <div class="container d-flex justify-content-center">
         <div class="reservation-container row g-0 w-100">
@@ -248,14 +172,53 @@
                     </div>
 
                     <!-- TOMBOL SUBMIT HITAM TEGAS -->
-                    <button type="submit" class="btn-submit shadow-sm">Pesan Sekarang</button>
+                  <style>
+    .btn-custom {
+        border: none;
+        padding: 15px 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 50px; /* Membuat ujung bulat seperti di image_73bb5a.png */
+        transition: all 0.3s ease;
+        text-align: center;
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    /* Tombol Pesan (Elegan Teal) */
+    .btn-pesan {
+        background: linear-gradient(135deg, #0f766e, #0e7490);
+        box-shadow: 0 4px 15px rgba(15, 118, 110, 0.3);
+    }
+    .btn-pesan:hover {
+        background: linear-gradient(135deg, #0d6a63, #0c6880);
+        transform: translateY(-2px);
+    }
+
+    /* Tombol Batal (Elegan Soft Gray) */
+    .btn-batal {
+        background: linear-gradient(135deg, #64748b, #475569);
+        box-shadow: 0 4px 15px rgba(100, 116, 139, 0.3);
+    }
+    .btn-batal:hover {
+        background: linear-gradient(135deg, #475569, #334155);
+        transform: translateY(-2px);
+    }
+</style>
+
+<!-- Gunakan struktur ini di dalam form Anda -->
+<div class="mt-4">
+    <button type="submit" class="btn-custom btn-pesan">Pesan Sekarang</button>
+    <a href="/" class="btn-custom btn-batal" style="text-decoration: none;">Batal</a>
+</div>
                 </form>
             </div>
 
         </div>
->>>>>>> 6f8497c79cd0d1da10ecf66533ffe4c4fa0787d2
     </div>
-</div>
 
 </body>
 </html>
